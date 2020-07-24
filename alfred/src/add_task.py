@@ -6,7 +6,7 @@ import argparse
 
 from notion_api import notion_api
 from utils import app_url
-
+from datetime import datetime
 
 try:
     collection = notion_api.tasks_database().collection
@@ -23,6 +23,7 @@ try:
     row = collection.add_row()
     row.name = query
     row.status = status
+    row.do_date = datetime.strptime(datetime.now().strftime("%d %B, %Y"), "%d %B, %Y")
 
     if args.tags:
         tags = ' '.join(args.tags).split(',')
